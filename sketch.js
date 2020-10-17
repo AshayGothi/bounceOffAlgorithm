@@ -1,5 +1,5 @@
 var fixedRect, movingRect;
-
+var gameobject1,gameobject2,gameobject3,gameobject4;
 function setup() {
   createCanvas(1200,800);
   fixedRect = createSprite(400, 100, 50, 80);
@@ -11,20 +11,26 @@ function setup() {
 
   movingRect.velocityY = -5;
   fixedRect.velocityY = +5;
+  gameobject1=createSprite(100,100,50,50); 
+  gameobject1.shapeColor = "green";
+  gameobject2=createSprite(200,100,50,50); 
+  gameobject2.shapeColor = "green";
+  gameobject3=createSprite(300,100,50,50); 
+  gameobject3.shapeColor = "green";
+  gameobject4=createSprite(400,100,50,50); 
+  gameobject4.shapeColor = "green";
+  
 }
 
 function draw() {
-  background(0,0,0);  
-
-  if (movingRect.x - fixedRect.x < fixedRect.width/2 + movingRect.width/2
-      && fixedRect.x - movingRect.x < fixedRect.width/2 + movingRect.width/2) {
-    movingRect.velocityX = movingRect.velocityX * (-1);
-    fixedRect.velocityX = fixedRect.velocityX * (-1);
-  }
-  if (movingRect.y - fixedRect.y < fixedRect.height/2 + movingRect.height/2
-    && fixedRect.y - movingRect.y < fixedRect.height/2 + movingRect.height/2){
-    movingRect.velocityY = movingRect.velocityY * (-1);
-    fixedRect.velocityY = fixedRect.velocityY * (-1);
-  }
+  background(0,0,0); movingRect.x = World.mouseX;
+   movingRect.y = World.mouseY;
+   if(isTouching(movingRect,gameobject1)) { 
+    movingRect.shapeColor = "blue";
+     gameobject1.shapeColor = "blue";
+     } else { movingRect.shapeColor = "green";
+      gameobject1.shapeColor = "green"; }
+bounceOff(movingRect,fixedRect)
+  
   drawSprites();
 }
